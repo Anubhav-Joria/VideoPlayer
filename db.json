@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "name": "category1",
+      "id": 1
+    },
+    {
+      "name": "kjkjsfdh",
+      "id": 2
+    }
+  ],
+  "cards": [
+    {
+      "name": "Anubahl",
+      "link": "jjdkjsdfkhj",
+      "bucket": "kjkjsfdh",
+      "id": 1
+    }
+  ]
+}
