@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CardArea />} />
           <Route path="/add" element={<Add />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route path="/edit/:id" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </div>
