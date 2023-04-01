@@ -6,7 +6,7 @@ import Cards from "./Cards";
 const CardArea = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
-  const [cards, setCards] = useState<string[]>([]);
+  const [cards, setCards] = useState<string[]>(null);
 
   const BASE_URL = "http://localhost:8000";
   const handleFetchCategories = async () => {
@@ -59,6 +59,7 @@ const CardArea = () => {
           height: { sx: "auto", md: "92vh" },
           borderRight: "1px solid #3d3d3d",
           px: { sx: 0, md: 2 },
+          width: { md: "15%" },
         }}
       >
         <Sidebar

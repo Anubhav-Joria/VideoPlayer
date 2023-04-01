@@ -17,7 +17,7 @@ const Categories = ({
       direction="row"
       sx={{
         overflowY: "auto",
-        height: { sx: "auto", md: "95%" },
+        height: { xs: "auto", md: "95%" },
         flexDirection: { md: "column" },
       }}
     >
