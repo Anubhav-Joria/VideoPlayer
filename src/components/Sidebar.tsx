@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 
 interface CategoriesProps {
   categories: any;
@@ -21,11 +21,15 @@ const Categories = ({
         flexDirection: { md: "column" },
       }}
     >
+      <Typography variant="h4" my={3}>
+        Categories
+      </Typography>
       {categories.map((category: any, index: number) => (
         <Box sx={{ margin: 1 }} key={index}>
           <Button
             className="category-btn"
             onClick={() => setSelectedCategory(category)}
+            variant={category === selectedCategory ? "contained" : "outlined"}
           >
             {category}
           </Button>
