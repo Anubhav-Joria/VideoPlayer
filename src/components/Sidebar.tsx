@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 interface CategoriesProps {
   categories: any;
@@ -11,29 +11,40 @@ const Categories = ({
   selectedCategory,
   setSelectedCategory,
 }: CategoriesProps) => {
-  console.log("categories", categories);
   return (
     <Stack
       direction="row"
       sx={{
         overflowY: "auto",
-        height: { xs: "auto", md: "95%" },
+        height: { sx: "auto", md: "95%" },
+        mt: { sx: 0, md: 3 },
         flexDirection: { md: "column" },
       }}
     >
-      <Typography variant="h4" my={3}>
-        Categories
-      </Typography>
-      {categories.map((category: any, index: number) => (
-        <Box sx={{ margin: 1 }} key={index}>
-          <Button
-            className="category-btn"
-            onClick={() => setSelectedCategory(category)}
-            variant={category === selectedCategory ? "contained" : "outlined"}
-          >
-            {category}
-          </Button>
-        </Box>
+      <button
+        className="category-btn"
+        onClick={() => setSelectedCategory("All Items")}
+        style={{
+          background:
+            "All Items" === selectedCategory ? "#1976d2" : "transparent",
+          color: "All Items" === selectedCategory ? "white" : "#1976d2",
+        }}
+      >
+        <Typography>All Items</Typography>
+      </button>
+      {categories.map((category: any) => (
+        <button
+          className="category-btn"
+          onClick={() => setSelectedCategory(category)}
+          style={{
+            background:
+              category === selectedCategory ? "#1976d2" : "transparent",
+            color: category === selectedCategory ? "white" : "#1976d2",
+          }}
+          key={category.name}
+        >
+          <Typography>{category}</Typography>
+        </button>
       ))}
     </Stack>
   );
