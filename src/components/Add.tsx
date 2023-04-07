@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import FormValidation from "./Form/FormValidation";
+import React from "react";
+import Form from "./Form";
 
 function Add() {
-  useEffect(() => {
-    console.log("add page useEffect running");
-  }, []);
-
-  const navigate = useNavigate();
-
   return (
     <div>
-      <FormValidation name="" link="" bucket="" add={true} index={-1} />
+      <Form add={true} />
     </div>
   );
 }

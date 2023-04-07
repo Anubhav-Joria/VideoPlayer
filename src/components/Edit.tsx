@@ -1,12 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import FormValidation from "./Form/FormValidation";
+import Form from "./Form";
 
 function Edit() {
-  let navigate = useNavigate();
   return (
     <div>
-      <FormValidation name="" link="" bucket="" editing={true} index={-1} />
+      <Form editing={true} />
     </div>
   );
 }
