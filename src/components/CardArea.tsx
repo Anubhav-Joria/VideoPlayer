@@ -4,9 +4,9 @@ import Sidebar from "./Sidebar";
 import Cards from "./Cards";
 
 const CardArea = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Items");
   const [categories, setCategories] = useState<string[]>([]);
-  const [cards, setCards] = useState<string[]>(null);
+  const [cards, setCards] = useState<any>(null);
 
   const BASE_URL = "http://localhost:8000";
   const handleFetchCategories = async () => {
@@ -22,8 +22,6 @@ const CardArea = () => {
   };
 
   const fetchAllCards = async () => {
-    console.log("fetching cards");
-
     let url = `${BASE_URL}/cards`;
     const cardsData = await fetch(url);
     const jsonData = await cardsData.json();
@@ -31,11 +29,9 @@ const CardArea = () => {
   };
 
   const fetchCategoryData = async () => {
-    console.log("fetching cards based on Categories");
-    console.log("selected", selectedCategory);
     let url = `${BASE_URL}/cards`;
-    if (selectedCategory) {
-      url = `${url}?bucket=${selectedCategory}`;
+    if (selectedCategory !== "All Items") {
+      url = `${url}?category=${selectedCategory}`;
     }
     const data = await fetch(url);
     const parsedData = await data.json();
@@ -70,9 +66,8 @@ const CardArea = () => {
       </Box>
 
       <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
-        <Typography variant="h4" fontWeight="bold" mb={2}>
-          {selectedCategory || "All"}{" "}
-          <span style={{ color: "#FC1503" }}>Cards</span>
+        <Typography variant="h4" fontWeight="bold" mb={2} color={"#FC1503"}>
+          {selectedCategory}
         </Typography>
         <Cards
           handleFetchCategories={handleFetchCategories}

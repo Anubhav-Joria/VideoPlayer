@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -7,19 +7,19 @@ import { Box, Grid } from "@mui/material";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import Modal from "@mui/material/Modal";
-
+import { useNavigate } from "react-router-dom";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1000,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   margin: "auto",
-  p: 4,
 };
+
 interface CardItemProp {
   handleFetchCategories: any;
   fetchCategoryData: any;
@@ -32,12 +32,12 @@ const CardItem = ({
   card,
 }: CardItemProp) => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const playVideo = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
+  const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
 
   const deleteCard = (index: number) => {
     const url = `http://localhost:8000/cards/${index}`;
@@ -50,12 +50,19 @@ const CardItem = ({
       })
       .catch(() => console.log("error"));
   };
+
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        <Typography gutterBottom variant="h5" component="div">
-          {card?.name}
-        </Typography>
+      <Card sx={{ maxWidth: 345, margin: { xs: "auto" } }}>
+        {card.name.length > 20 ? (
+          <Typography variant="h5" component="h2">
+            {`${card.name.substring(0, 20)}...`}
+          </Typography>
+        ) : (
+          <Typography variant="h5" component="h2">
+            {card.name}
+          </Typography>
+        )}
 
         <CardActions>
           <Grid container>
@@ -65,9 +72,17 @@ const CardItem = ({
               </Button>
             </Grid>
 
-            {/* <Grid item xs={12} mt={1}> */}
             <Grid item xs={6} mt={2}>
-              <Button size="small">Edit</Button>
+              <Button
+                onClick={() => {
+                  navigate(`/edit/${card.id}`);
+                }}
+              >
+                Edit
+                <span>
+                  <EditIcon />
+                </span>
+              </Button>
             </Grid>
             <Grid item xs={6} mt={2}>
               <Button
@@ -77,8 +92,10 @@ const CardItem = ({
                 }}
               >
                 Delete
+                <span>
+                  <DeleteOutlinedIcon />
+                </span>
               </Button>
-              {/* </Grid> */}
             </Grid>
           </Grid>
         </CardActions>
@@ -90,11 +107,7 @@ const CardItem = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Playing Video
-          </Typography>
-
-          <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
+          <ReactPlayer url={card?.link} />
         </Box>
       </Modal>
     </>
