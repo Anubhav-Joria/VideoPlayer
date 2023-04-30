@@ -8,7 +8,7 @@ const CardArea = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [cards, setCards] = useState<any>(null);
 
-  const BASE_URL = "http://localhost:8000";
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const handleFetchCategories = async () => {
     let allCategories: string[] = [];
     let url = `${BASE_URL}/categories`;

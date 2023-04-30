@@ -8,7 +8,9 @@ type FormType = {
   add?: boolean;
 };
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+
 
 function Form(props: FormType) {
   const [name, setName] = useState<any>("");

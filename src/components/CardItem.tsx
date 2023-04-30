@@ -40,7 +40,7 @@ const CardItem = ({
   const navigate = useNavigate();
 
   const deleteCard = (index: number) => {
-    const url = `http://localhost:8000/cards/${index}`;
+    const url = `${process.env.REACT_APP_BASE_URL}/cards/${index}`;
     axios
       .delete(url)
       .then(() => {
